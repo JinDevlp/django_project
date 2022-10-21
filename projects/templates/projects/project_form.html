@@ -1,0 +1,19 @@
+{% extends 'main.html' %} {% load bootstrap5 %} {% block content %}
+
+<h1>Project Form</h1>
+
+<!-- Bootstrap 5 Contact Form Snippet -->
+<div class="container">
+  <div class="row my-5">
+    <div class="col-md-12">
+      <form method="POST" class="form" enctype="multipart/form-data">
+        {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+        <button value="Submit" type="submit" class="btn btn-primary">
+          Submit
+        </button>
+        {% endbuttons %}
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock%}

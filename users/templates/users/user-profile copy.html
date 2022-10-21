@@ -1,0 +1,129 @@
+{% extends 'main.html'%} {% block content%}
+
+<div class="container px-5 py-5">
+  <div
+    class="row gx-5 align-items-center justify-content-center justify-content-lg-between"
+  >
+    <div class="col-12 col-lg-5">
+      <h2 class="display-4 lh-1 mb-4">{{profile.name}}</h2>
+      <h5 style="text-transform: uppercase">{{profile.stack}}</h5>
+      {% for skill in profile.skill_set.all %}
+      <div class="badge bg-primary bg-gradient rounded-pill mb-2">
+        {{skill}}
+      </div>
+      {%endfor%}
+      <p class="lead fw-normal text-muted my-3 mb-lg-0">{{profile.about_me}}</p>
+    </div>
+    <div class="col-sm-8 col-md-4 text-center">
+      <div class="px-5 px-sm-0">
+        <img
+          class="img-fluid rounded-circle pb-3"
+          style="width: 200px"
+          src="{{profile.profile_image.url}}"
+          alt="..."
+        />
+        <div>
+          {% if profile.social_github %}
+          <a
+            class="text-decoration-none link-dark"
+            title="Github"
+            href="{{profile.social_github}}"
+            target="_blank"
+          >
+            <i class="fab fa-github fa-2xl mx-3"></i>
+          </a>
+          {% endif %} {% if profile.social_linkedin %}
+          <a
+            class="text-decoration-none link-dark"
+            title="Linkedin"
+            href="{{profile.social_linkedin}}"
+            target="_blank"
+          >
+            <i class="fab fa-linkedin-in fa-2xl mx-3"></i>
+          </a>
+          {% endif %} {% if profile.social_twitter %}
+
+          <a
+            class="text-decoration-none link-dark"
+            title="Twitter"
+            href="{{profile.social_twitter}}"
+            target="_blank"
+          >
+            <i class="fab fa-twitter fa-2xl mx-3"></i>
+          </a>
+
+          {% endif %} {% if profile.social_website %}
+
+          <a
+            class="text-decoration-none link-dark"
+            title="Website"
+            href="{{profile.social_website}}"
+            target="_blank"
+          >
+            <i class="fa-solid fa-house fa-2xl mx-3"></i>
+          </a>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Projects -->
+<div class="container">
+  <!-- Page Heading -->
+
+  <div class="row justify-content-center align-items-center">
+    <div class="col-8">
+      <h1 class="my-2">Projects</h1>
+    </div>
+    <div class="col-4">
+      <a class="btn btn-primary" href="{% url 'create-project' %}"
+        >Create a Project</a
+      >
+    </div>
+  </div>
+  <hr />
+
+  <!-- Project One -->
+  <div class="row">
+    {% for project in profile.project_set.all %}
+    <div class="col-md-7 mt-2">
+      <a href="{% url 'project' project.id %}" class="project">
+        <img
+          class="img-fluid rounded mb-3 mb-md-0"
+          src="{{project.featured_image.url}}"
+          alt=""
+        />
+      </a>
+    </div>
+    <div class="col-md-5">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-8">
+          <h3>{{project.title}}</h3>
+        </div>
+        <div class="col-4">
+          <a class="text-decoration-none link-dark mx-3" href="#"
+              ><i class="fa-solid fa-binoculars"></i>
+          View<a>
+        </div>
+      </div>
+      {% for tag in project.tags.all%}
+      <div class="badge bg-dark bg-gradient rounded-pill mb-2">{{tag}}</div>
+      {%endfor%}
+      <p>{{project.description|slice:"100"}}</p>
+      <p class="text-muted mb-1 mr-2">
+        <span style="font-weight: bold"> {{project.vote_ratio}}% </span>
+        ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}} )
+      </p>
+      <p class="text-muted">
+        {{project.created|date:'d N Y'}} &middot; # of ppl in project
+      </p>
+      <a class="btn btn-primary" href="#">Join Project</a>
+    </div>
+    <hr />
+    {%endfor%}
+  </div>
+  <!-- /.row -->
+</div>
+{% endblock content%}

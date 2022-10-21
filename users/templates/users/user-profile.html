@@ -1,0 +1,139 @@
+{% extends 'main.html'%} {% block content%}
+
+<div class="container px-5 py-5">
+  <div
+    class="row gx-5 align-items-center justify-content-center justify-content-lg-between"
+  >
+    <div class="col-12 col-lg-5">
+      <h2 class="display-4 lh-1 mb-4">{{profile.name}}</h2>
+      <h5 style="text-transform: uppercase">{{profile.stack}}</h5>
+      {% for skill in profile.skill_set.all %}
+      <div class="badge bg-primary bg-gradient rounded-pill mb-2">
+        {{skill}}
+      </div>
+      {%endfor%}
+      <p class="lead fw-normal text-muted my-3 mb-lg-0">{{profile.about_me}}</p>
+    </div>
+    <div class="col-sm-8 col-md-4 text-center">
+      <div class="px-5 px-sm-0">
+        <img
+          class="img-fluid rounded-circle pb-3"
+          style="width: 200px"
+          src="{{profile.profile_image.url}}"
+          alt="..."
+        />
+        <!-- <div class="px-5 px-sm-0">
+          <span class="badge rounded-pill bg-primary">
+            <a class="text-decoration-none link-dark" href="#"
+              ><i class="fa-solid fa-user-pen"></i> Edit Profile</a
+            >
+          </span>
+        </div> -->
+
+
+
+        <div>
+          {% if profile.social_github %}
+          <a
+            class="text-decoration-none link-dark"
+            title="Github"
+            href="{{profile.social_github}}"
+            target="_blank"
+          >
+            <i class="fab fa-github fa-2xl mx-3"></i>
+          </a>
+          {% endif %} {% if profile.social_linkedin %}
+          <a
+            class="text-decoration-none link-dark"
+            title="Linkedin"
+            href="{{profile.social_linkedin}}"
+            target="_blank"
+          >
+            <i class="fab fa-linkedin-in fa-2xl mx-3"></i>
+          </a>
+          {% endif %} {% if profile.social_twitter %}
+
+          <a
+            class="text-decoration-none link-dark"
+            title="Twitter"
+            href="{{profile.social_twitter}}"
+            target="_blank"
+          >
+            <i class="fab fa-twitter fa-2xl mx-3"></i>
+          </a>
+
+          {% endif %} {% if profile.social_website %}
+
+          <a
+            class="text-decoration-none link-dark"
+            title="Website"
+            href="{{profile.social_website}}"
+            target="_blank"
+          >
+            <i class="fa-solid fa-house fa-2xl mx-3"></i>
+          </a>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Projects -->
+<div class="container px-4 px-lg-5">
+  <div class="row">
+    <div class="col-lg-8">
+      <h1 class="fw-bolder mb-1">Projects</h1>
+    </div>
+    <hr>
+  
+      </div>
+      <!-- Heading Row-->
+      {% for project in profile.project_set.all %}
+      <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-8">
+          <a href="{% url 'project' project.id %}">
+            <img
+              class="img-fluid rounded mb-4 mb-lg-0"
+              src="{{project.featured_image.url}}"
+              alt="..."
+            />
+          </a>
+          {% for tag in project.tags.all%}
+          <a class="badge bg-secondary text-decoration-none link-light" href="#"
+            >{{tag}}</a
+          >
+          {% endfor %}
+        </div>
+
+        <div class="col-lg-4">
+          <a class="text-decoration-none link-dark mx-3" href="{% url 'project' project.id %}"
+              ><i class="fa-solid fa-binoculars"></i>
+          View<a>
+            <a class="btn btn-primary" href="{% url 'join-project' project.id %}">Join Project</a>
+          <h1 class="font-weight-light">{{project.title}}</h1>
+          <p>
+            This is a template that is great for small businesses. It doesn't
+            have too much fancy flare to it, but it makes a great use of the
+            standard Bootstrap core components. Feel free to use this template
+            for any project you want!
+          </p>
+          <p>{{project.description|slice:"100"}}</p>
+          <p class="text-muted mb-1 mr-2">
+            <span style="font-weight: bold"> {{project.vote_ratio}}% </span>
+            ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}} )
+          </p>
+          <p class="text-muted">
+            {{project.created|date:'d N Y'}} &middot; # of ppl in project
+          </p>
+         
+        </div>
+      </div>
+      <hr>
+      {%endfor%}
+    </div>
+    <!-- Page Heading -->
+
+    {% endblock content%}
+  </div>
+</div>

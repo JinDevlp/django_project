@@ -1,0 +1,121 @@
+{% extends 'main.html'%} {% load static %} {% load bootstrap5 %}
+<!-- Register form begin -->
+{% block content %} {% if page == 'register' %}
+
+<!-- Register form begin -->
+<div class="container-fluid ps-md-0">
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image">
+      <img
+        class="img-fluid rounded-3 my-5"
+        src="{% static 'images/login.png' %}"
+        alt="..."
+      />
+    </div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">Register an Account</h3>
+
+              <!-- Register Form -->
+              <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %} {% bootstrap_form form %}
+                <div class="form-floating mb-3">
+                  <label for="username">{{field.label}}</label>
+                  {{field}}
+                </div>
+
+                <div class="d-grid">
+                  <button
+                    class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                    type="submit"
+                  >
+                    Register
+                  </button>
+                  <div class="text-center">
+                    <a class="small" href="{% url 'login' %}"
+                      >Already have an account?</a
+                    >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+
+<!-- Login form begin -->
+
+<div class="container-fluid ps-md-0">
+  <div class="row g-0">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image">
+      <img
+        class="img-fluid rounded-3 my-5"
+        src="{% static 'images/login.png' %}"
+        alt="..."
+      />
+    </div>
+    <!-- signin card div -->
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">Welcome back!</h3>
+
+              <!-- Sign In Form -->
+              <form action="" method="POST">
+                {% csrf_token %}
+                <!-- Input username -->
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control input--text"
+                    id="username"
+                    name="username"
+                    placeholder="Username"
+                  />
+                  <label for="username">Username</label>
+                </div>
+
+                <!-- Input password -->
+                <div class="form-floating mb-3">
+                  <input
+                    type="password"
+                    class="input input -- password form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                  />
+                  <label for="password">Password</label>
+                </div>
+
+                <div class="d-grid">
+                  <button
+                    class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                    type="submit"
+                  >
+                    Sign in
+                  </button>
+                  <div class="text-center">
+                    <a class="small" href="{% url 'register' %}"
+                      >Dont have an account?</a
+                    >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %} {% endblock content %}
