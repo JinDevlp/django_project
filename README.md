@@ -7,3 +7,4 @@ I wanted to make a website where users can join and build projects together.
 - create project 
 - delete project 
 - view project
+- join projec
